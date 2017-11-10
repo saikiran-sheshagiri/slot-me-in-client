@@ -1,0 +1,9 @@
+.main-zone {
+  margin: 20px;
+}
+
+.create-event-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

@@ -1,0 +1,62 @@
+[
+	{
+		"eventName": "Christmas celebrations",
+		"eventId": 12345,
+		"organizer" : {
+			"name": "",
+			"email": "",
+			"phone": ""
+		},
+		"activities": [
+			{
+				"activityId": 1,
+				"activityName": "activity 1",
+				"activityDate": "",
+				"activityTime": "",
+				"activityDuration": "",
+				"numberOfSlots": "2"
+			}
+		], 
+		"slots": [
+			{
+				"activityId": 1,
+				"slotId": 1,
+				"participant": {
+					"name": "",
+					"email": "",
+					"phone": ""
+				}
+			}
+		]
+	}
+]
+
+/**
+
+POST - /api/events
+{
+	"eventName": "",
+	"organizerName": "",
+	"organizerEmail": "",
+	"organizerPhone": ""
+}
+
+GET - /api/events/{eventId}
+
+[EventObject]
+{
+	"id": 1,
+	"name": "",
+	"organizer": {
+		"name": "",
+		"email": "",
+		"phone": ""
+	},
+	"activities": [
+
+	]
+}
+
+
+
+*/
