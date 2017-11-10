@@ -53,7 +53,22 @@ GET - /api/events/{eventId}
 		"phone": ""
 	},
 	"activities": [
-
+		{
+			"id": 1,
+			"name": "",
+			"activityDate": "",
+			"activityTime": "",
+			"activityDuration": "",
+			"numberOfSlot": 3,
+			"slots": [
+				"id": 1,
+				"participant": {
+					"name": "",
+					"email": "",
+					"phone": ""
+				}
+			]
+		}
 	]
 }
 
