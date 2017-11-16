@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { EventService } from '../services/event.service';
+import { Event } from '../models/Event';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-create-event',
@@ -14,7 +18,9 @@ export class CreateEventComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private fb: FormBuilder
+	private fb: FormBuilder,
+	private eventService: EventService,
+	private router: Router
 	) {
     this.createForm();
   }
@@ -37,8 +43,19 @@ export class CreateEventComponent implements OnInit {
   }
 
   submitForm(value: any): void {
-    console.log('Reactive Form Data: ');
-    console.log(value);
+	const event = new Event();
+	event.name = value.eventName;
+	event.organizer = {
+		name: value.organizerName,
+		email: value.organizerEmail,
+		phone: value.organizerPhone
+	};
+
+	this.eventService.saveEvent(event).subscribe((e) => {
+		console.log('CreateEventComponent: ');
+		console.log(e);
+		this.router.navigate(['activities', e._id]);
+	});
   }
 
   goBack(): void {

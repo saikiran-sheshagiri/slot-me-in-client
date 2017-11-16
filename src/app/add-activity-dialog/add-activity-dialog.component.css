@@ -1,0 +1,13 @@
+.time-field-hours {
+	max-width: 100px;
+}
+
+.time-field-minutes {
+	max-width: 100px;
+	margin-left: 25px;
+}
+
+.am-pm {
+	max-width: 50px;
+	margin-left: 25px;
+}
