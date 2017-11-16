@@ -25,3 +25,8 @@
 	  font-size: 14px;
 	  font-style: italic;
   }
+
+.mat-column-activityActions {
+	flex: 0 0 60px !important;
+	cursor: pointer;
+}

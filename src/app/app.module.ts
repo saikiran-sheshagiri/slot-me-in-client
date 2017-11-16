@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule, MatButtonModule, MatCardModule,
 	MatFormFieldModule, MatInputModule, MatExpansionModule, MatTableModule, MatDialogModule,
-	MatDatepickerModule, MatSelectModule, MatNativeDateModule} from '@angular/material';
+	MatDatepickerModule, MatSelectModule, MatNativeDateModule, MatIconModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
 import {AppComponent} from './app.component';
@@ -16,10 +16,12 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { EventService } from './services/event.service';
 import { AddActivityDialogComponent } from './add-activity-dialog/add-activity-dialog.component';
 import { ActivityService } from './services/activity.service';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
 				declarations: [
-								AppComponent, HomeComponent, CreateEventComponent, EventSlotsComponent, ActivitiesComponent, AddActivityDialogComponent
+								AppComponent, HomeComponent, CreateEventComponent, EventSlotsComponent, ActivitiesComponent,
+								AddActivityDialogComponent, ConfirmModalComponent
 				],
 				imports: [
 								BrowserModule,
@@ -38,10 +40,11 @@ import { ActivityService } from './services/activity.service';
 								MatDialogModule,
 								MatDatepickerModule,
 								MatSelectModule,
-								MatNativeDateModule
+								MatNativeDateModule,
+								MatIconModule
 				],
 				providers: [ EventService, ActivityService ],
 				bootstrap: [AppComponent],
-				entryComponents: [AddActivityDialogComponent]
+				entryComponents: [AddActivityDialogComponent, ConfirmModalComponent]
 })
 export class AppModule {}

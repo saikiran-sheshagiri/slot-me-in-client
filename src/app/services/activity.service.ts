@@ -17,7 +17,15 @@ export class ActivityService {
 
   constructor(private http: HttpClient) { }
 
+	getActivities(eventId: any): Observable<Activity[]> {
+		const url = `${this.eventsUrl}/${eventId}/activities`;
 
+		return this.http.get<Activity[]>(url, httpOptions)
+					.pipe(
+						tap(heroes => this.log(`fetched activities`)),
+						catchError(this.handleError('getActivities', []))
+					);
+	}
 
   saveActivity(activity: Activity, eventId: any): Observable<any> {
 	const url = `${this.eventsUrl}/${eventId}/activities`;
@@ -26,6 +34,15 @@ export class ActivityService {
       tap((e) => { console.log('added activity'); console.log(e); }),
       catchError((this.handleError<Event>('addActivity')))
     );
+  }
+
+  deleteActivity(eventId: any, activityId: any): Observable<Activity> {
+	const url = `${this.eventsUrl}/${eventId}/activities/${activityId}`;
+
+	return this.http.delete<Activity>(url, httpOptions).pipe(
+		tap(_ => this.log(`deleted activity`)),
+		catchError(this.handleError<Activity>('deleteActivity'))
+	  );
   }
 
     /**

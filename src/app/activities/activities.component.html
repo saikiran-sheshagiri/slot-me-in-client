@@ -35,7 +35,12 @@
 					  <mat-header-cell *matHeaderCellDef> Slots# </mat-header-cell>
 					  <mat-cell *matCellDef="let element"> {{element.numberOfSlots}} </mat-cell>
 					</ng-container>
-				
+					<ng-container matColumnDef="activityActions">
+							<mat-header-cell *matHeaderCellDef></mat-header-cell>
+							<mat-cell  *matCellDef="let element">
+								<mat-icon svgIcon="delete" (click)="deleteActivity(element)"></mat-icon>
+							</mat-cell>
+						</ng-container>
 					<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 					<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 				  </mat-table>
