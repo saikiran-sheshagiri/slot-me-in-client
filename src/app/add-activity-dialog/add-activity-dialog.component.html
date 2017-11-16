@@ -1,38 +1,51 @@
-<h1 mat-dialog-title>Add an activity:</h1>
+<h1 mat-dialog-title>Add an activity</h1>
 <form [formGroup]="activityForm" (ngSubmit)="submitForm(activityForm.value)" novalidate>
 	<div mat-dialog-content>
 		<mat-form-field>
 		  <input matInput placeholder="Name" formControlName="activityName">
+		  <mat-error>Please enter activty name</mat-error>
 		</mat-form-field>
 		<mat-form-field>
-		  <input matInput placeholder="Date" formControlName="activityDate">
+		  <input matInput="date" [matDatepicker]="picker" (focus)="picker.open()" placeholder="Date" formControlName="activityDate">
+		  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+		  <mat-datepicker #picker></mat-datepicker>
+		  <mat-error>Please enter a date</mat-error>
 		</mat-form-field>
 		<mat-form-field class="time-field-hours">
-			<mat-select placeholder="Hours" [(value)]="selectedHour">
+			<mat-select placeholder="Hours" formControlName="activityHour">
 				<mat-option *ngFor="let hour of hours" [value]="hour">
 				  {{ hour }}
 				</mat-option>
 			</mat-select>
 		</mat-form-field>
 		<mat-form-field class="time-field-minutes">
-			<mat-select placeholder="Minutes" [(value)]="selectedMinutes">
+			<mat-select placeholder="Minutes" formControlName="activityMinutes">
 				<mat-option *ngFor="let min of minutes" [value]="min">
 				  {{ min }}
 				</mat-option>
 			</mat-select>
 		</mat-form-field>
 		<mat-form-field class="am-pm">
-			<mat-select [(value)]="selectedMeridiem">
+			<mat-select [(value)]="selectedMeridiem" formControlName="activityMeridiem">
 				<mat-option *ngFor="let meridiem of meridiems" [value]="meridiem">
 				  {{ meridiem }}
 				</mat-option>
 			</mat-select>
 		</mat-form-field>
 		<mat-form-field>
-		  <input matInput placeholder="Duration" formControlName="activityDuration">
+		  <mat-select placeholder="Select duration of activity" formControlName="activityDuration">
+			<mat-option *ngFor="let duration of possibleDurationHours" [value]="duration">
+			  {{ duration }}
+			</mat-option>
+		</mat-select>
+		  <mat-hint>Enter number of hours for the activity</mat-hint>
 		</mat-form-field>
 		<mat-form-field>
-			<input matInput placeholder="# of slots" formControlName="activitySlots">
+			<mat-select placeholder="# of slots" formControlName="activitySlots">
+				<mat-option *ngFor="let slot of slots" [value]="slot">
+				  {{ slot }}
+				</mat-option>
+			</mat-select>
 		</mat-form-field>
 	</div>
 	<div mat-dialog-actions>

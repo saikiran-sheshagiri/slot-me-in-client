@@ -19,7 +19,7 @@ export class EventService {
   saveEvent(event: Event): Observable<any> {
     return this.http.post<Event>(this.eventsUrl, event, httpOptions).pipe(
       tap((e) => { console.log('added event'); console.log(e); }),
-      catchError((this.handleError<Event>('addHero')))
+      catchError((this.handleError<Event>('addEvent')))
     );
   }
 
@@ -42,7 +42,7 @@ export class EventService {
 
     /** Log a HeroService message with the MessageService */
     private log(message: string) {
-      console.log('HeroService: ' + message);
+      console.log('Event Service: ' + message);
     }
 
 }

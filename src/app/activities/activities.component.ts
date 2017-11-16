@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import { IActivity, Activity } from '../models/Activity';
 import { ISlot, Slot } from '../models/Slot';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { AddActivityDialogComponent } from '../add-activity-dialog/add-activity-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-activities',
@@ -12,25 +13,36 @@ import { AddActivityDialogComponent } from '../add-activity-dialog/add-activity-
   styleUrls: ['./activities.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class ActivitiesComponent implements OnInit {
+export class ActivitiesComponent implements OnInit, OnDestroy {
+    displayedColumns = ['name', 'activityDate', 'duration', 'numberOfSlots'];
 
+    ACTIVITIES_DATA: Activity[] = [];
+    dataSource = new MatTableDataSource(this.ACTIVITIES_DATA);
 
-  displayedColumns = ['name', 'activityDate', 'duration', 'numberOfSlots'];
+    eventId;
+    paramsSubscription;
 
-  ACTIVITIES_DATA: Activity[] = [];
-  dataSource = new MatTableDataSource(this.ACTIVITIES_DATA);
+    constructor(public dialog: MatDialog, private route: ActivatedRoute) {
 
-  constructor(public dialog: MatDialog) {
+    }
 
-  }
-	ngOnInit() {
+    ngOnInit() {
+		this.paramsSubscription = this.route.params.subscribe(params => {
+			this.eventId = params['eventId'];
+		});
+	}
+
+	ngOnDestroy(): void {
+		this.paramsSubscription.unsubscribe();
 	}
 
 
-  addActivity(): void {
+    addActivity(): void {
 		const dialogRef = this.dialog.open(AddActivityDialogComponent, {
 		  width: '450px',
-		  data: { },
+		  data: {
+              eventId: this.eventId
+          },
 		  disableClose: true
 		});
 		dialogRef.afterClosed().subscribe(newActivity => {
@@ -40,7 +52,7 @@ export class ActivitiesComponent implements OnInit {
 				console.log('Cancel clicked');
 			}
 		});
-  }
+    }
 
 }
 
