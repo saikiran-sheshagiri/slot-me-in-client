@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>{{ event.name }}: Publish or Share info</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+		<mat-list>
+			<mat-list-item>
+				<div class="slot-info">
+				<h3>Slots</h3>
+				<p>To view the slot me in page, click on the link below. Share the link with everyone so they can join.</p>
+				<a (click)="goToSlots()">click here to see event slots</a>
+			</div>
+			</mat-list-item>
+			<mat-list-item>
+				<div class="activities-info">
+				<h3>Activities</h3>
+				<p>To add, delete or view your activities save this link. **Do not forget to save this link </p>
+				<a (click)="goToActivities()">click here to see event activities</a>
+			</div>
+			</mat-list-item>
+		</mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+  </mat-card-actions>
+  <mat-card-footer>
+	  <p>****** Thanks for using our Slot me in application. We welcome you feedback. <a href="mailto:geekbazar47@gmail.com?Subject=Slot%20me%20in:%20Feedback" target="_top">Send Mail</a>  *******</p>
+  </mat-card-footer>
+</mat-card>

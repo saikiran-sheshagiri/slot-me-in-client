@@ -1,9 +1,17 @@
 <mat-card>
 	<mat-card-header>
 	  <mat-card-title>
-		<h2>Create and event</h2>
+		<mat-horizontal-stepper>
+			<mat-step label="Create an event">
+			</mat-step>
+			<mat-step label="Add activities to the event">
+			</mat-step>
+			<mat-step label="Publish details to everyone">
+			</mat-step>
+		</mat-horizontal-stepper>
+		<h3>Event form:</h3>
 	  </mat-card-title>
-	  <mat-card-subtitle>subtitle of the create</mat-card-subtitle>
+	  <!-- <mat-card-subtitle>subtitle of the create</mat-card-subtitle> -->
 	</mat-card-header>
 	<form class="app-form create-form" [formGroup]="createEventForm" (ngSubmit)="submitForm(createEventForm.value)" novalidate>
 	<mat-card-content>

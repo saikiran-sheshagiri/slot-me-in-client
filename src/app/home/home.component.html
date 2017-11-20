@@ -1,20 +1,22 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <h2>Welcome to the Slot me in app</h2>
+    	<h2>Welcome to Slot me app</h2>
     </mat-card-title>
-    <mat-card-subtitle>subtitle of the app</mat-card-subtitle>
+    <mat-card-subtitle>One place to manage your event management.</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-      very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-    </p>
+	<mat-horizontal-stepper>
+		<mat-step label="Create an event">
+		</mat-step>
+		<mat-step label="Add activities to the event">
+		</mat-step>
+		<mat-step label="Publish details to everyone">
+		</mat-step>
+	</mat-horizontal-stepper>
+	<p>It's that simple to use this application. Now its time to create an event to let your participant choose the slots.</p>
   </mat-card-content>
   <mat-card-actions>
 	<button mat-raised-button (click)="createEvent()">Create</button>
-	<p>remove these two buttons later</p>
-	<button mat-raised-button (click)="activities('5a0de5374d8f98176a74b662')">Activities</button>
-	<button mat-raised-button (click)="slots('5a0cab5338c14e2db7e5bc15')">Slots</button>
   </mat-card-actions>
 </mat-card>

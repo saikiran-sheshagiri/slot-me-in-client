@@ -5,10 +5,12 @@ import { ISlot, Slot } from '../models/Slot';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatIconRegistry } from '@angular/material';
 import { AddActivityDialogComponent } from '../add-activity-dialog/add-activity-dialog.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityService } from '../services/activity.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { EventService } from '../services/event.service';
+import { Event } from '../models/Event';
 
 @Component({
   selector: 'app-activities',
@@ -21,11 +23,17 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
 
     dataSource = new MatTableDataSource();
 
+	slotsDisplayedColumns = ['activityName', 'slots'];
+	slotsSource = new MatTableDataSource();
+
     eventId;
-    paramsSubscription;
+	paramsSubscription;
+	event: Event = new Event();
 
 	constructor(public dialog: MatDialog,
 				private route: ActivatedRoute,
+				private router: Router,
+				private eventService: EventService,
 				private activityService: ActivityService,
 				iconRegistry: MatIconRegistry, sanitizer: DomSanitizer
 	) {
@@ -38,6 +46,9 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
 		this.paramsSubscription = this.route.params.subscribe(params => {
 			this.eventId = params['eventId'];
 
+			// get event
+			this.getEvent();
+
 			// get activities
 			this.getActivities();
 		});
@@ -47,9 +58,26 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
 		this.paramsSubscription.unsubscribe();
 	}
 
+
+	isParticipantAvailable(slot: Slot) {
+		if (slot.participant) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	getEvent(): void {
+		this.eventService.getEvent(this.eventId)
+				.subscribe(e => this.event = e);
+	}
+
 	getActivities(): void {
 		this.activityService.getActivities(this.eventId)
-				.subscribe(activities => this.dataSource.data = activities);
+				.subscribe(activities => {
+					this.dataSource.data = activities;
+					this.slotsSource.data = activities;
+				});
 	}
 
 	deleteActivity(activity) {
@@ -92,7 +120,11 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
 				console.log('Cancel clicked');
 			}
 		});
-    }
+	}
+
+	publichEvent(): void {
+		this.router.navigate(['publish', this.eventId]);
+	}
 
 }
 

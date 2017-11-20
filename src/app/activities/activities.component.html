@@ -1,51 +1,90 @@
 <mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>{{event.name}}: Activities</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="no-activities-message" *ngIf="!dataSource.data.length">
+      <p>No activities found for this event.</p>
+    </div>
+    <mat-table #table [dataSource]="dataSource" *ngIf="dataSource.data.length">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="activityDate">
+        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.activityDate}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="duration">
+        <mat-header-cell *matHeaderCellDef> Duration (hrs)</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.duration}} </mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="numberOfSlots">
+        <mat-header-cell *matHeaderCellDef> Slots# </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.numberOfSlots}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="activityActions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-icon svgIcon="delete" (click)="deleteActivity(element)"></mat-icon>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <div class="add-activity-action">
+      
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+		<button mat-raised-button color="primary" (click)="addActivity()">Add activity</button>
+		<button mat-raised-button color="accent" (click)="publichEvent()">Publish</button>
+  </mat-card-actions>
+  <mat-card-footer>
+		
+  </mat-card-footer>
+</mat-card>
+<mat-card>
 	<mat-card-header>
-	  <mat-card-title>
-		<h2>Step 2: Add activities of your event</h2>
-	  </mat-card-title>
-	  <mat-card-subtitle>Provide the number of slots for each event so participants can pick them up</mat-card-subtitle>
+		<mat-card-title>
+			<h2>{{event.name}}: Slots</h2>
+		</mat-card-title>
 	</mat-card-header>
-	<button mat-raised-button color="primary" (click)="addActivity()">Add activity</button>
 	<mat-card-content>
-				  <div class="no-activities-message" *ngIf="!dataSource.data.length">
-					  <p>No activities found for this event.</p>
-				  </div>
-				  <mat-table #table [dataSource]="dataSource" *ngIf="dataSource.data.length">
-					
-					<!-- Position Column -->
-					<ng-container matColumnDef="name">
-					  <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-					  <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-					</ng-container>
-				
-					<!-- Name Column -->
-					<ng-container matColumnDef="activityDate">
-					  <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-					  <mat-cell *matCellDef="let element"> {{element.activityDate}} </mat-cell>
-					</ng-container>
-				
-					<!-- Weight Column -->
-					<ng-container matColumnDef="duration">
-					  <mat-header-cell *matHeaderCellDef> Duration (hrs)</mat-header-cell>
-					  <mat-cell *matCellDef="let element"> {{element.duration}} </mat-cell>
-					</ng-container>
-				
-					<!-- Color Column -->
-					<ng-container matColumnDef="numberOfSlots">
-					  <mat-header-cell *matHeaderCellDef> Slots# </mat-header-cell>
-					  <mat-cell *matCellDef="let element"> {{element.numberOfSlots}} </mat-cell>
-					</ng-container>
-					<ng-container matColumnDef="activityActions">
-							<mat-header-cell *matHeaderCellDef></mat-header-cell>
-							<mat-cell  *matCellDef="let element">
-								<mat-icon svgIcon="delete" (click)="deleteActivity(element)"></mat-icon>
-							</mat-cell>
-						</ng-container>
-					<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-					<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-				  </mat-table>
-	</mat-card-content>
-	<mat-card-actions>
-	</mat-card-actions>
-	<mat-card-footer></mat-card-footer>
-  </mat-card>
+			<mat-table #tableSlots [dataSource]="slotsSource">
+			  <ng-container matColumnDef="activityName">
+				<mat-header-cell *matHeaderCellDef> <h3>  Activity Name </h3></mat-header-cell>
+				<mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+			  </ng-container>
+			  <ng-container matColumnDef="slots">
+					<mat-header-cell *matHeaderCellDef> <h3>  Slots </h3></mat-header-cell>
+					<mat-cell *matCellDef="let element"> 
+						<ul class="activities-slots-list">
+							<li *ngFor="let slot of element.slots">
+									<p>{{element.activityDate | date:'MMM d, y, h:mm a'}}
+									<span *ngIf="isParticipantAvailable(slot)">
+											&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;&nbsp;&nbsp;
+										{{slot.participant.name}};&nbsp;&nbsp;&nbsp;&nbsp;
+										{{slot.participant.email}};&nbsp;&nbsp;&nbsp;&nbsp;
+										{{slot.participant.phone}}
+									</span>
+								</p>
+							</li>
+						</ul>
+					</mat-cell>
+			  </ng-container>
+			  <mat-header-row *matHeaderRowDef="slotsDisplayedColumns"></mat-header-row>
+			  <mat-row *matRowDef="let row; columns: slotsDisplayedColumns;"></mat-row>
+			</mat-table>
+			</mat-card-content>
+</mat-card>

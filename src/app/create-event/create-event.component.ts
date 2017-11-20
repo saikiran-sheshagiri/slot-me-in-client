@@ -52,14 +52,12 @@ export class CreateEventComponent implements OnInit {
 	};
 
 	this.eventService.saveEvent(event).subscribe((e) => {
-		console.log('CreateEventComponent: ');
-		console.log(e);
 		this.router.navigate(['activities', e._id]);
 	});
   }
 
   goBack(): void {
-	  this.location.back();
+	  this.router.navigateByUrl('/');
   }
 
 }

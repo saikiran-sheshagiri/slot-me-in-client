@@ -19,8 +19,17 @@ export class EventService {
   saveEvent(event: Event): Observable<any> {
     return this.http.post<Event>(this.eventsUrl, event, httpOptions).pipe(
       tap((e) => { console.log('added event'); console.log(e); }),
-      catchError((this.handleError<Event>('addEvent')))
+      catchError(this.handleError<Event>('addEvent'))
     );
+  }
+
+  getEvent(eventId: any): Observable<any> {
+	const tUrl = `${this.eventsUrl}/${eventId}`;
+	return this.http.get<Event>(tUrl, httpOptions)
+	  				.pipe(
+						tap((e) => { console.log('get event'); console.log(e); }),
+						catchError(this.handleError<Event>('getEvent'))
+					);
   }
 
     /**

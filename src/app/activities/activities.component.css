@@ -30,3 +30,22 @@
 	flex: 0 0 60px !important;
 	cursor: pointer;
 }
+
+.add-activity-action {
+	padding: 20px;
+}
+
+.activities-slots-list {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.activities-slots-list li {
+	width: 100%;
+}
+
+.mat-column-activityName {
+	flex: 0 0 200px !important;
+	font-weight: bold;
+}

@@ -1,0 +1,17 @@
+.mat-column-activityName {
+	flex: 0 0 200px !important;
+	font-weight: bold;
+}
+
+.slots-list {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	display: block;
+}
+
+.slots-list li {
+	padding: 5px;
+	float: left;
+}
