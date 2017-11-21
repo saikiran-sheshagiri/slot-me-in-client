@@ -20,13 +20,12 @@ import { ActivityService } from './services/activity.service';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { SlotService } from './services/slot.service';
 import { AddParticipantComponent } from './add-participant/add-participant.component';
-import { PublishComponent } from './publish/publish.component';
 import { PublishEventComponent } from './publish-event/publish-event.component';
 
 @NgModule({
 				declarations: [
 								AppComponent, HomeComponent, CreateEventComponent, EventSlotsComponent, ActivitiesComponent,
-								AddActivityDialogComponent, ConfirmModalComponent, AddParticipantComponent, PublishComponent, PublishEventComponent
+								AddActivityDialogComponent, ConfirmModalComponent, AddParticipantComponent, PublishEventComponent
 				],
 				imports: [
 								BrowserModule,
