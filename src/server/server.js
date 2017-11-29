@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //connect to the mongodb instance
-const mongo_uri = 'mongodb://localhost:27017/slotmein';
+const mongo_uri = 'mongodb://slotmein:IVJlDRaplDNCsuFEdGvzxkt4jerSpqSHfCoKPBLtlBiPO8834A1HqnymGLZlKMo8bNK87U8567TDvyiQiLai7A==@slotmein.documents.azure.com:10255/?ssl=true&replicaSet=globaldb';
 // Use bluebird
 const mongo_options = { promiseLibrary: bluebird };
 
