@@ -42,6 +42,8 @@ app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/index.html');
 });
 
-app.listen(4747, () => {
-    console.log(`Example running on at 4747`);
+var port = process.env.PORT || 4747;
+
+app.listen(port, () => {
+    console.log(`Example running on at ` + port);
 });
