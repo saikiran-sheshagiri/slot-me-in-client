@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable()
 export class ActivityService {
 
-	private eventsUrl = 'http://localhost:4747/api/events';
+	private eventsUrl = '/api/events';
 
   constructor(private http: HttpClient) { }
 

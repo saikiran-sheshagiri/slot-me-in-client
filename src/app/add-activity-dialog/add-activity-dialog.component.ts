@@ -24,6 +24,7 @@ export class AddActivityDialogComponent implements OnInit {
 				51, 52, 53, 54, 55, 56, 57, 58, 59];
 
 	meridiems = ['AM', 'PM'];
+	selectedMeridiem = 'AM';
 	slots = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	possibleDurationHours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 	eventId;
