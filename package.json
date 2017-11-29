@@ -15,6 +15,9 @@
     "serve-app": "node build/server.js",
     "serve-api-dev": "npm run build-watch-api && nodemon build/server.js"
   },
+  "engines": {
+	"node": ">=6.9.1"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^5.0.0",
