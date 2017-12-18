@@ -38,8 +38,8 @@ app.use('/api', router);
 //setting middleware
 app.use(express.static(path.join(__dirname, 'public'))); //Serves resources from public folder
 
-app.get('/', function (req, res) {
-	res.sendFile(__dirname + '/index.html');
+app.get('*', function (req, res) {
+	res.sendFile(__dirname + '/public/index.html');
 });
 
 var port = process.env.PORT || 4747;
