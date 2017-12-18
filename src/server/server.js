@@ -42,7 +42,7 @@ app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/index.html');
 });
 
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 4747;
 
 app.listen(port, () => {
     console.log(`Example running on at ` + port);
