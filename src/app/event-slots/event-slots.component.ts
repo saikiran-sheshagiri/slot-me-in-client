@@ -6,7 +6,6 @@ import { ActivityService } from '../services/activity.service';
 import { Activity } from '../models/Activity';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import 'rxjs/add/operator/mergemap';
 import {MatTableDataSource, MatDialog} from '@angular/material';
 import { AddParticipantComponent } from '../add-participant/add-participant.component';
 import { Event } from '../models/Event';
